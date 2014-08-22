@@ -5,6 +5,7 @@ else
   default[:stunnel][:packages] = %w(stunnel)
 end
 
+default[:stunnel][:files_cookbook] = nil
 default[:stunnel][:service_name] = 'stunnel4'
 default[:stunnel][:ssl_dir] = '/etc/ssl'
 default[:stunnel][:server_ssl_req]  = "/C=US/ST=Several/L=Locality/O=Example/OU=Operations/CN=#{node[:fqdn]}/emailAddress=root@#{node[:fqdn]}"

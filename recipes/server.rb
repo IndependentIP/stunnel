@@ -12,6 +12,7 @@ directory '/etc/stunnel/'
     end
 
     cookbook_file location do
+      cookbook node[:stunnel][:files_cookbook]
       path path
       mode "0600"
       owner "root"

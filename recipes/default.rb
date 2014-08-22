@@ -7,12 +7,8 @@ if node[:stunnel][:services].any?
     # Copy over the keys and certs if specified in the node
     [:key, :cert, :cafile].each do |type|
       if service["#{type}_location"]
-        unless service[type]
-          ext = type == :key ? 'key' : 'crt'
-          service.default[type] = "/etc/stunnel/#{name}.#{type}"
-        end
-
         cookbook_file service["#{type}_location"] do
+          cookbook node[:stunnel][:files_cookbook]
           path service[type]
           mode "0600"
           owner "root"
