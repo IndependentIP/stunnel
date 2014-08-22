@@ -16,6 +16,7 @@ action :create do
     :key => new_resource.key,
     :key_location => new_resource.key_location,
     :verify => new_resource.verify,
+    :delay => new_resource.delay,
     :timeout_close => new_resource.timeout_close,
     :client => new_resource.client
   )

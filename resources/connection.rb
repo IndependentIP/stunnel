@@ -11,5 +11,6 @@ attribute :cert_location, :kind_of => String
 attribute :key, :kind_of => String
 attribute :key_location, :kind_of => String
 attribute :verify, :kind_of => Integer
+attribute :delay, :kind_of => String
 attribute :timeout_close, :kind_of => [TrueClass,FalseClass]
 attribute :client, :kind_of => [TrueClass,FalseClass]

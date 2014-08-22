@@ -11,9 +11,9 @@ if node[:stunnel][:services].any?
           cookbook node[:stunnel][:files_cookbook]
           path service[type]
           mode "0600"
-          owner "root"
-          group "root"
-          action :create_if_missing
+          owner node[:stunnel][:user]
+          group node[:stunnel][:group]
+          action :create
         end
       end
     end
