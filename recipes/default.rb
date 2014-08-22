@@ -2,6 +2,23 @@ node[:stunnel][:packages].each do |s_pkg|
   package s_pkg
 end
 
+if node[:stunnel][:services].any?
+  node[:stunnel][:services].each do |service|
+    # Copy over the keys and certs if specified in the node
+    [:key, :cert].each do |type|
+      if service["#{type}_file"] do
+        cookbook_file service["#{type}_file"] do
+          path service[type]
+          mode "0600"
+          owner "root"
+          group "root"
+          action :create_if_missing
+        end
+      end
+    end
+  end
+end
+
 # Create directory to hold the pid inside the chroot jail
 if(node[:stunnel][:use_chroot])
   directory "#{node[:stunnel][:chroot_path]}" do
