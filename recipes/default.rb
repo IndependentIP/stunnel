@@ -3,11 +3,16 @@ node[:stunnel][:packages].each do |s_pkg|
 end
 
 if node[:stunnel][:services].any?
-  node[:stunnel][:services].each do |service|
+  node[:stunnel][:services].each do |name, service|
     # Copy over the keys and certs if specified in the node
-    [:key, :cert].each do |type|
-      if service["#{type}_file"] do
-        cookbook_file service["#{type}_file"] do
+    [:key, :cert, :cafile].each do |type|
+      if service["#{type}_location"] do
+        unless service[type]
+          ext = type == :key ? 'key' : 'crt'
+          service.default[type] = "/etc/stunnel/#{name}.#{type}"
+        end
+
+        cookbook_file service["#{type}_location"] do
           path service[type]
           mode "0600"
           owner "root"

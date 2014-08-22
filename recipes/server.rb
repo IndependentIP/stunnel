@@ -1,17 +1,23 @@
 directory '/etc/stunnel/'
 
 # Copy over the certificate_file from the files folder
-if node[:stunnel][:certificate_file]
-  unless node[:stunnel][:certificate_path]
-    node.default[:stunnel][:certificate_path] = "/ets/stunnel/stunnel.pem"
-  end
+[:certificate, :key].each do |type|
+  location = "#{type}_location"
+  path = "#{type}_path"
 
-  cookbook_file node[:stunnel][:certificate_file] do
-    path node[:stunnel][:certificate_path]
-    mode "0600"
-    owner "root"
-    group "root"
-    action :create_if_missing
+  if location
+    unless path
+      ext = type == :certificate ? 'crt' : 'key'
+      node.default[:stunnel]["#{type}_path"] = "/etc/stunnel/stunnel-#{type}.#{ext}"
+    end
+
+    cookbook_file location do
+      path path
+      mode "0600"
+      owner "root"
+      group "root"
+      action :create_if_missing
+    end
   end
 end
 

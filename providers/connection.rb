@@ -10,10 +10,11 @@ action :create do
     :connect => new_resource.connect,
     :accept => new_resource.accept,
     :cafile => new_resource.cafile,
+    :cafile_location => new_resource.cafile_location,
     :cert => new_resource.cert,
-    :cert_file => new_resource.cert_file,
+    :cert_location => new_resource.cert_location,
     :key => new_resource.key,
-    :key_file => new_resource.key_file,
+    :key_location => new_resource.key_location,
     :verify => new_resource.verify,
     :timeout_close => new_resource.timeout_close,
     :client => new_resource.client
