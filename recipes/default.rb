@@ -6,7 +6,7 @@ if node[:stunnel][:services].any?
   node[:stunnel][:services].each do |name, service|
     # Copy over the keys and certs if specified in the node
     [:key, :cert, :cafile].each do |type|
-      if service["#{type}_location"] do
+      if service["#{type}_location"]
         unless service[type]
           ext = type == :key ? 'key' : 'crt'
           service.default[type] = "/etc/stunnel/#{name}.#{type}"
