@@ -84,8 +84,8 @@ TIMEOUTclose = 0
 <% unless opts[:cafile].nil? -%>
 CAfile = <%= opts[:cafile] %>
 <% end -%>
-<% unless opts[:timeout_close].nil? -%>
-TIMEOUTclose = <%= opts[:timeout_close] ? 1 : 0 %>
+<% unless opts[:timeout_connect].nil? -%>
+TIMEOUTconnect = <%= opts[:timeout_connect] %>
 <% end -%>
 <% unless opts[:client].nil? -%>
 client = <%= opts[:client] ? "yes" : "no" %>
